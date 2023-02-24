@@ -21,8 +21,12 @@ import java.util.Optional;
 @NoArgsConstructor
 @Data
 public class ClothesService {
-    @Autowired
     ClothesRepository clothesRepository;
+
+    @Autowired
+    public ClothesService(ClothesRepository clothesRepository) {
+        this.clothesRepository = clothesRepository;
+    }
 
     @PostConstruct
     private void init(){

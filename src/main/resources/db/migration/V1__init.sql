@@ -1,4 +1,6 @@
 DROP TABLE IF EXISTS clothes;
+DROP TABLE IF EXISTS orders_item;
+DROP TABLE IF EXISTS orders;
 
 CREATE TABLE clothes
 (
@@ -8,6 +10,25 @@ CREATE TABLE clothes
     size CHAR(50),
     create_at TIMESTAMP NOT NULL DEFAULT CURRENT_TIMESTAMP,
     update_at TIMESTAMP NOT NULL DEFAULT CURRENT_TIMESTAMP
+);
+
+CREATE TABLE orders
+(
+    id bigserial PRIMARY KEY,
+    username CHAR(250) NOT NULL,
+    create_at TIMESTAMP NOT NULL DEFAULT CURRENT_TIMESTAMP,
+    update_at TIMESTAMP NOT NULL DEFAULT CURRENT_TIMESTAMP,
+    status CHAR(50) NOT NULL
+);
+
+CREATE TABLE orders_item
+(
+    id bigserial PRIMARY KEY,
+    order_id bigint NOT NULL,
+    clothes_id bigint NOT NULL,
+    quantity INT NOT NULL,
+    FOREIGN KEY (order_id) REFERENCES orders(id),
+    FOREIGN KEY (clothes_id) REFERENCES clothes(id)
 );
 
 INSERT INTO clothes (title, price, size) VALUES ('coat', 10, 'M'), ('jeans', 20, 'L'), ('shirt', 40, 'XXL'),
