@@ -1,16 +1,18 @@
 package com.SpringStorage.models;
 
 import com.SpringStorage.entities.Clothes;
+import lombok.Data;
 
 import java.util.ArrayList;
 import java.util.Collections;
 import java.util.List;
-
+@Data
 public class Cart {
     private List<CartItem> cart;
-    private int totalPrice;
+    private double totalPrice;
 
     public Cart() {
+        totalPrice = 0;
         this.cart = new ArrayList<>();
     }
 

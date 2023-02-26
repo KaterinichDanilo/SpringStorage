@@ -1,10 +1,11 @@
 package com.SpringStorage.entities;
 
 import com.fasterxml.jackson.annotation.JsonBackReference;
-import jakarta.persistence.*;
 import lombok.AllArgsConstructor;
 import lombok.Data;
 import lombok.NoArgsConstructor;
+
+import javax.persistence.*;
 
 @Entity(name = "orders_item")
 @AllArgsConstructor

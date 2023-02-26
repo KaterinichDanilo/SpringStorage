@@ -3,7 +3,6 @@ package com.SpringStorage.services;
 import com.SpringStorage.entities.Clothes;
 import com.SpringStorage.repositories.ClothesRepository;
 import com.SpringStorage.specifications.ClothesSpecification;
-import jakarta.annotation.PostConstruct;
 import lombok.AllArgsConstructor;
 import lombok.Data;
 import lombok.NoArgsConstructor;
@@ -14,6 +13,7 @@ import org.springframework.data.domain.PageRequest;
 import org.springframework.data.jpa.domain.Specification;
 import org.springframework.stereotype.Service;
 
+import javax.annotation.PostConstruct;
 import java.security.SecureRandom;
 import java.util.Optional;
 

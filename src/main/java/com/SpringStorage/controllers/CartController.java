@@ -2,43 +2,44 @@ package com.SpringStorage.controllers;
 
 import com.SpringStorage.models.Cart;
 import com.SpringStorage.services.CartService;
+import lombok.NoArgsConstructor;
+import lombok.RequiredArgsConstructor;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
-import org.springframework.web.bind.annotation.GetMapping;
-import org.springframework.web.bind.annotation.PathVariable;
-import org.springframework.web.bind.annotation.RequestBody;
-import org.springframework.web.bind.annotation.ResponseBody;
+import org.springframework.web.bind.annotation.*;
 
-@Controller("/cart")
+@RestController
+@RequestMapping("/cart")
+@RequiredArgsConstructor
 public class CartController {
-    private final CartService cartService;
+    private CartService cartService;
 
+    @Autowired
     public CartController(CartService cartService) {
         this.cartService = cartService;
     }
 
     @GetMapping("/add/{id}")
-    public void addToCart(@PathVariable(name = "id") Long id){
+    public Cart addToCart(@PathVariable(name = "id") Long id){
         cartService.add(id);
+        return cartService.getCart();
     }
 
-    @GetMapping
-    public Cart getCart(){
-        return cartService.getCurrentCart();
+    @GetMapping("/new")
+    public Cart getNewCart(){
+        return cartService.getNewCart();
     }
 
     @GetMapping("/inc/{id}")
-    @ResponseBody
-    public Cart increase(@RequestBody Cart cart, @PathVariable(name = "id") Long id){
-        cart.increase(id, 1);
-        return cart;
+    public Cart increase(@PathVariable(name = "id") Long id){
+        cartService.getCart().increase(id, 1);
+        return cartService.getCart();
     }
 
     @GetMapping("/reduce/{id}")
-    @ResponseBody
-    public Cart reduce(@RequestBody Cart cart, @PathVariable(name = "id") Long id){
-        cart.reduce(id, -1);
-        return cart;
+    public Cart reduce(@PathVariable(name = "id") Long id){
+        cartService.getCart().increase(id, -1);
+        return cartService.getCart();
     }
 
     @GetMapping("/clear")
@@ -47,9 +48,8 @@ public class CartController {
     }
 
     @GetMapping("/remove/{id}")
-    @ResponseBody
-    public Cart removeFromCart(@RequestBody Cart cart, @PathVariable(name = "id") Long id){
+    public Cart removeFromCart(@PathVariable(name = "id") Long id){
         cartService.remove(id);
-        return cart;
+        return cartService.getCart();
     }
 }

@@ -2,28 +2,35 @@ package com.SpringStorage.services;
 
 import com.SpringStorage.entities.Clothes;
 import com.SpringStorage.models.Cart;
-import jakarta.annotation.PostConstruct;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
+
+import javax.annotation.PostConstruct;
 
 @Service
 public class CartService {
     private Cart cart;
-    @Autowired
-    ClothesService clothesService;
+    private ClothesService clothesService;
 
+    public CartService(ClothesService clothesService) {
+        this.clothesService = clothesService;
+    }
     @PostConstruct
-    private void init() {
-        cart = new Cart();
+    private void init(){
+        this.cart = new Cart();
     }
 
-    public Cart getCurrentCart() {
+    public Cart getNewCart() {
+        return new Cart();
+    }
+
+    public Cart getCart(){
         return cart;
     }
 
     public void add(Long id){
         Clothes clothes = clothesService.findById(id).orElseThrow(() -> new RuntimeException("Clothes not found id = " + id));
-        cart.add(clothes);
+        this.cart.add(clothes);
     }
 
     public void remove(Long prodId){

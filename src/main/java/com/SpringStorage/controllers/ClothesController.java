@@ -19,10 +19,12 @@ import java.util.List;
 //@NoArgsConstructor
 @Data
 public class ClothesController {
-    @Autowired
     private ClothesService clothesService;
 
-
+    @Autowired
+    public ClothesController(ClothesService clothesService) {
+        this.clothesService = clothesService;
+    }
     @GetMapping
     public List<Clothes> getAllClothes(
             @RequestParam(name = "p", defaultValue = "1") Integer page,
@@ -30,6 +32,10 @@ public class ClothesController {
             @RequestParam(name = "max_price", required = false) Integer maxPrice,
             @RequestParam(name = "title", required = false) String titlePart,
             @RequestParam(name = "size", required = false) String size){
+
+        if (page < 1){
+            page = 1;
+        }
 
         Specification<Clothes> specification = clothesService.createSpecificationBy(minPrice, maxPrice, titlePart, size);
 
