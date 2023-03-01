@@ -20,7 +20,7 @@ public class Order {
     @Column(name = "id")
     private Long id;
 
-    @JoinColumn(name = "username")
+    @JoinColumn(name = "user_id")
     private String username;
 
     @OneToMany(cascade = CascadeType.ALL, mappedBy = "order", fetch = FetchType.EAGER)

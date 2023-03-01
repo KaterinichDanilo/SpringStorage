@@ -3,18 +3,13 @@ package com.SpringStorage.services;
 import com.SpringStorage.entities.Clothes;
 import com.SpringStorage.repositories.ClothesRepository;
 import com.SpringStorage.specifications.ClothesSpecification;
-import lombok.AllArgsConstructor;
 import lombok.Data;
 import lombok.NoArgsConstructor;
-import lombok.RequiredArgsConstructor;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.data.domain.Page;
 import org.springframework.data.domain.PageRequest;
 import org.springframework.data.jpa.domain.Specification;
 import org.springframework.stereotype.Service;
-
-import javax.annotation.PostConstruct;
-import java.security.SecureRandom;
 import java.util.Optional;
 
 @Service
@@ -26,11 +21,6 @@ public class ClothesService {
     @Autowired
     public ClothesService(ClothesRepository clothesRepository) {
         this.clothesRepository = clothesRepository;
-    }
-
-    @PostConstruct
-    private void init(){
-        System.out.println("init");
     }
 
     public Page<Clothes> findAll(Specification<Clothes> specification, int page){
