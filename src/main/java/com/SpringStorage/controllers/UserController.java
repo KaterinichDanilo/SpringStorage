@@ -1,6 +1,5 @@
 package com.SpringStorage.controllers;
 
-import com.SpringStorage.entities.Clothes;
 import com.SpringStorage.entities.Role;
 import com.SpringStorage.entities.User;
 import com.SpringStorage.services.UserService;
@@ -40,8 +39,9 @@ public class UserController {
         return ResponseEntity.created(uri).body(userService.saveUser(user));
     }
 
-    @PostMapping("/addrole")
+    @PostMapping("/addRole")
     public ResponseEntity<User> addRoleToUser(@RequestBody User user, @RequestBody Role role){
-        return ResponseEntity.ok().body(userService.addRoleToUser(user.getLogin(), role.getName()));
+        userService.addRoleToUser(user.getUsername(), role.getName());
+        return ResponseEntity.ok().body(user);
     }
 }

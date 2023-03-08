@@ -19,6 +19,4 @@ public class ClothesSpecification {
     public static Specification<Clothes> sizeLike(String size){
         return ((root, query, criteriaBuilder) -> criteriaBuilder.like(root.get("size"), String.format("%%%s%%", size)));
     }
-
-
 }

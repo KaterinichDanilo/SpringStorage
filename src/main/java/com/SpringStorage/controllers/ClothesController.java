@@ -16,7 +16,6 @@ import java.util.List;
 @RestController
 @RequestMapping("/clothes")
 @NoArgsConstructor
-//@NoArgsConstructor
 @Data
 public class ClothesController {
     private ClothesService clothesService;
